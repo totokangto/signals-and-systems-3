@@ -12,11 +12,13 @@ int main() {
 	
 	ofstream prob1_mag_file;
 	ofstream prob1_phase_file;
+	ofstream prob1_index_file;
 	prob1_mag_file.open("prob1_mag.txt");
 	prob1_phase_file.open("prob1_phase.txt");
+	prob1_index_file.open("prob1_index.txt");
 
 	complex* ip_x= new complex[N];   // ip_x = x[n]
-	complex* W_exp = new complex[N];    // W_exp = exp(-j2¥ðkn/N)
+	complex* W_exp = new complex[N];    // W_exp = exp(-j2Ï€kn/N)
 	complex* op_X = new complex[N];  // op_X = X[k]
 
 	// x[n] = 1(0 <= n <= 9), 0 (otherwise)
@@ -33,14 +35,15 @@ int main() {
 	for (int k = 0; k < N; k++) {
 		op_X[k] = complex(0, 0);
 		for (int j = 0; j < N; j++) {
-			double a = -2 * PI * k * j / N;
-			W_exp[j] = complex(cos(a), sin(a));
+			double theta = -2 * PI * k * j / N;
+			W_exp[j] = complex(cos(theta), sin(theta));
 			op_X[k] += (ip_x[j] * W_exp[j]);
 		}
 	}
 
 	// write to file
 	for (int i = 0; i < N; i++) {
+		prob1_index_file << i << endl;
 		prob1_mag_file << op_X[i].get_mag() << endl;
 		prob1_phase_file << op_X[i].get_phase() << endl;
 	}
