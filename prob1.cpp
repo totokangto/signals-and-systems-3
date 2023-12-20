@@ -34,10 +34,10 @@ int main() {
 	// define X[k] by DTFS
 	for (int k = 0; k < N; k++) {
 		op_X[k] = complex(0, 0);
-		for (int j = 0; j < N; j++) {
-			double theta = -2 * PI * k * j / N;
-			W_exp[j] = complex(cos(theta), sin(theta));
-			op_X[k] += (ip_x[j] * W_exp[j]);
+		for (int n = 0; n < N; n++) {
+			double theta = -2 * PI * k * n / N;
+			W_exp[n] = complex(cos(theta), sin(theta));
+			op_X[k] += (ip_x[n] * W_exp[n]);
 		}
 	}
 
